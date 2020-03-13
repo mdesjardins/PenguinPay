@@ -3,16 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C00C73C4241BF3D9007188D8 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C00C73C3241BF3D9007188D8 /* SDWebImage */; };
 		C0FE6C6A241B8D64002D41EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE6C69241B8D64002D41EC /* AppDelegate.swift */; };
 		C0FE6C6C241B8D64002D41EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE6C6B241B8D64002D41EC /* SceneDelegate.swift */; };
 		C0FE6C6E241B8D64002D41EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE6C6D241B8D64002D41EC /* ContentView.swift */; };
 		C0FE6C70241B8D67002D41EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0FE6C6F241B8D67002D41EC /* Assets.xcassets */; };
 		C0FE6C73241B8D67002D41EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0FE6C72241B8D67002D41EC /* Preview Assets.xcassets */; };
 		C0FE6C76241B8D67002D41EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0FE6C74241B8D67002D41EC /* LaunchScreen.storyboard */; };
+		C0FE6C7F241B9622002D41EC /* ServiceAPI in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE6C7E241B9622002D41EC /* ServiceAPI */; };
+		C0FE6C81241B9634002D41EC /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE6C80241B9634002D41EC /* ServiceManager.swift */; };
+		C0FE6C83241B96D9002D41EC /* CurrenciesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE6C82241B96D9002D41EC /* CurrenciesModel.swift */; };
+		C0FE6C85241B99E0002D41EC /* SendMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE6C84241B99E0002D41EC /* SendMoneyVC.swift */; };
+		C0FE6C87241B9BF7002D41EC /* SendMoneyVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE6C86241B9BF7002D41EC /* SendMoneyVM.swift */; };
+		C0FE6C89241BA24C002D41EC /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE6C88241BA24C002D41EC /* HomeVC.swift */; };
+		C0FE6C8E241BA3E2002D41EC /* CustomClassSPM in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE6C8D241BA3E2002D41EC /* CustomClassSPM */; };
+		C0FE6C91241BE322002D41EC /* CardViewSPM in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE6C90241BE322002D41EC /* CardViewSPM */; };
+		C0FE6C93241BEE82002D41EC /* destination.json in Resources */ = {isa = PBXBuildFile; fileRef = C0FE6C92241BEE82002D41EC /* destination.json */; };
+		C0FE6C99241BF244002D41EC /* DestionationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE6C98241BF244002D41EC /* DestionationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +35,14 @@
 		C0FE6C72241B8D67002D41EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C0FE6C75241B8D67002D41EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0FE6C77241B8D67002D41EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0FE6C80241B9634002D41EC /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		C0FE6C82241B96D9002D41EC /* CurrenciesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesModel.swift; sourceTree = "<group>"; };
+		C0FE6C84241B99E0002D41EC /* SendMoneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyVC.swift; sourceTree = "<group>"; };
+		C0FE6C86241B9BF7002D41EC /* SendMoneyVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyVM.swift; sourceTree = "<group>"; };
+		C0FE6C88241BA24C002D41EC /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		C0FE6C8B241BA30A002D41EC /* testimonial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testimonial.mp4; sourceTree = "<group>"; };
+		C0FE6C92241BEE82002D41EC /* destination.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = destination.json; path = PenguinPay/destination.json; sourceTree = SOURCE_ROOT; };
+		C0FE6C98241BF244002D41EC /* DestionationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestionationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +50,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0FE6C91241BE322002D41EC /* CardViewSPM in Frameworks */,
+				C0FE6C7F241B9622002D41EC /* ServiceAPI in Frameworks */,
+				C00C73C4241BF3D9007188D8 /* SDWebImage in Frameworks */,
+				C0FE6C8E241BA3E2002D41EC /* CustomClassSPM in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C00C73C5241BFFD7007188D8 /* SendMoneyVC */ = {
+			isa = PBXGroup;
+			children = (
+				C0FE6C84241B99E0002D41EC /* SendMoneyVC.swift */,
+			);
+			path = SendMoneyVC;
+			sourceTree = "<group>";
+		};
 		C0FE6C5D241B8D64002D41EC = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +87,11 @@
 		C0FE6C68241B8D64002D41EC /* PenguinPay */ = {
 			isa = PBXGroup;
 			children = (
+				C0FE6C97241BF15C002D41EC /* ServiceManager */,
+				C0FE6C96241BF14D002D41EC /* ViewModel */,
+				C0FE6C95241BF13C002D41EC /* ViewController */,
+				C0FE6C94241BF131002D41EC /* Model */,
+				C0FE6C8A241BA2FE002D41EC /* Resources */,
 				C0FE6C69241B8D64002D41EC /* AppDelegate.swift */,
 				C0FE6C6B241B8D64002D41EC /* SceneDelegate.swift */,
 				C0FE6C6D241B8D64002D41EC /* ContentView.swift */,
@@ -75,6 +111,49 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		C0FE6C8A241BA2FE002D41EC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C0FE6C92241BEE82002D41EC /* destination.json */,
+				C0FE6C8B241BA30A002D41EC /* testimonial.mp4 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C0FE6C94241BF131002D41EC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0FE6C82241B96D9002D41EC /* CurrenciesModel.swift */,
+				C0FE6C98241BF244002D41EC /* DestionationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C0FE6C95241BF13C002D41EC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C00C73C5241BFFD7007188D8 /* SendMoneyVC */,
+				C0FE6C88241BA24C002D41EC /* HomeVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C0FE6C96241BF14D002D41EC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0FE6C86241B9BF7002D41EC /* SendMoneyVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C0FE6C97241BF15C002D41EC /* ServiceManager */ = {
+			isa = PBXGroup;
+			children = (
+				C0FE6C80241B9634002D41EC /* ServiceManager.swift */,
+			);
+			path = ServiceManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -91,6 +170,12 @@
 			dependencies = (
 			);
 			name = PenguinPay;
+			packageProductDependencies = (
+				C0FE6C7E241B9622002D41EC /* ServiceAPI */,
+				C0FE6C8D241BA3E2002D41EC /* CustomClassSPM */,
+				C0FE6C90241BE322002D41EC /* CardViewSPM */,
+				C00C73C3241BF3D9007188D8 /* SDWebImage */,
+			);
 			productName = PenguinPay;
 			productReference = C0FE6C66241B8D64002D41EC /* PenguinPay.app */;
 			productType = "com.apple.product-type.application";
@@ -119,6 +204,12 @@
 				Base,
 			);
 			mainGroup = C0FE6C5D241B8D64002D41EC;
+			packageReferences = (
+				C0FE6C7D241B9622002D41EC /* XCRemoteSwiftPackageReference "ServiceAPI" */,
+				C0FE6C8C241BA3E2002D41EC /* XCRemoteSwiftPackageReference "CustomClassSPM" */,
+				C0FE6C8F241BE322002D41EC /* XCRemoteSwiftPackageReference "CardViewSPM" */,
+				C00C73C2241BF3D9007188D8 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = C0FE6C67241B8D64002D41EC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -135,6 +226,7 @@
 			files = (
 				C0FE6C76241B8D67002D41EC /* LaunchScreen.storyboard in Resources */,
 				C0FE6C73241B8D67002D41EC /* Preview Assets.xcassets in Resources */,
+				C0FE6C93241BEE82002D41EC /* destination.json in Resources */,
 				C0FE6C70241B8D67002D41EC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,8 +239,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0FE6C6A241B8D64002D41EC /* AppDelegate.swift in Sources */,
+				C0FE6C89241BA24C002D41EC /* HomeVC.swift in Sources */,
+				C0FE6C85241B99E0002D41EC /* SendMoneyVC.swift in Sources */,
+				C0FE6C83241B96D9002D41EC /* CurrenciesModel.swift in Sources */,
+				C0FE6C87241B9BF7002D41EC /* SendMoneyVM.swift in Sources */,
 				C0FE6C6C241B8D64002D41EC /* SceneDelegate.swift in Sources */,
+				C0FE6C99241BF244002D41EC /* DestionationModel.swift in Sources */,
 				C0FE6C6E241B8D64002D41EC /* ContentView.swift in Sources */,
+				C0FE6C81241B9634002D41EC /* ServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +440,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C00C73C2241BF3D9007188D8 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.1;
+			};
+		};
+		C0FE6C7D241B9622002D41EC /* XCRemoteSwiftPackageReference "ServiceAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alvathor/ServiceAPI.git";
+			requirement = {
+				branch = Development;
+				kind = branch;
+			};
+		};
+		C0FE6C8C241BA3E2002D41EC /* XCRemoteSwiftPackageReference "CustomClassSPM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alvathor/CustomClassSPM.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		C0FE6C8F241BE322002D41EC /* XCRemoteSwiftPackageReference "CardViewSPM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alvathor/CardViewSPM.git";
+			requirement = {
+				branch = Development;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C00C73C3241BF3D9007188D8 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C00C73C2241BF3D9007188D8 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		C0FE6C7E241B9622002D41EC /* ServiceAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE6C7D241B9622002D41EC /* XCRemoteSwiftPackageReference "ServiceAPI" */;
+			productName = ServiceAPI;
+		};
+		C0FE6C8D241BA3E2002D41EC /* CustomClassSPM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE6C8C241BA3E2002D41EC /* XCRemoteSwiftPackageReference "CustomClassSPM" */;
+			productName = CustomClassSPM;
+		};
+		C0FE6C90241BE322002D41EC /* CardViewSPM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE6C8F241BE322002D41EC /* XCRemoteSwiftPackageReference "CardViewSPM" */;
+			productName = CardViewSPM;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C0FE6C5E241B8D64002D41EC /* Project object */;
 }

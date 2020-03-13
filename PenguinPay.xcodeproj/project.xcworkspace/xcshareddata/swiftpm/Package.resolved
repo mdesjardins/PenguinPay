@@ -1,0 +1,52 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CardViewSPM",
+        "repositoryURL": "https://github.com/Alvathor/CardViewSPM.git",
+        "state": {
+          "branch": "Development",
+          "revision": "a6bf5ede7d91e859265680b1615e8fd445fb75f6",
+          "version": null
+        }
+      },
+      {
+        "package": "CustomClassSPM",
+        "repositoryURL": "https://github.com/Alvathor/CustomClassSPM.git",
+        "state": {
+          "branch": "master",
+          "revision": "7136305631b3e97645cab77d7354f344f435dcbe",
+          "version": null
+        }
+      },
+      {
+        "package": "SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
+        "state": {
+          "branch": null,
+          "revision": "2dcf1b65994d92ef8806f52dc41aa6fdd677489c",
+          "version": "5.6.1"
+        }
+      },
+      {
+        "package": "ServiceAPI",
+        "repositoryURL": "https://github.com/Alvathor/ServiceAPI.git",
+        "state": {
+          "branch": "Development",
+          "revision": "b82550c935663719e0b42f007465e2f183c78f64",
+          "version": null
+        }
+      },
+      {
+        "package": "UIViewExtensionsSPM",
+        "repositoryURL": "https://github.com/Alvathor/UIViewExtensionsSPM",
+        "state": {
+          "branch": "master",
+          "revision": "344cd23f97664273d57b34fd5918016079dc80d7",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
