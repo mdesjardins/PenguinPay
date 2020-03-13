@@ -11,24 +11,34 @@ import UIViewExtensionsSPM
 
 class SendMoneyViewModel {            
     
-    var destionation: Destination?
-    //MARK: Subscribers    
+    var selectedContinent: Destination?
+    var selectedCountry: Country? {
+        didSet {
+            prepateFor()
+        }
+    }
+    //MARK: Subscribers
+    var bindableCountrySelected = Bindable<Bool>()
     
     //MARK: - Networking
     private let serviceManager = ServiceManager()
-    let destinations = Bundle.main.decode([Destination].self, from: "destination.json")
+    let continents = Bundle.main.decode([Destination].self, from: "destination.json")
     
     //Get currencies
     
     func getCurrencies(
         onSuccess: @escaping () -> Void,
         onFailure: @escaping (String) -> Void
-    ) {
+    ) {        
         serviceManager.getCurrencies(onSuccess: { (obj) in
             onSuccess()
         }) { (err) in
             onFailure(err)
         }
+    }
+    
+    private func prepateFor() {
+        print(selectedCountry?.currency)     
     }
     
 }

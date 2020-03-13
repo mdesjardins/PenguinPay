@@ -16,7 +16,7 @@ struct Destination: Codable {
 
 // MARK: - Country
 struct Country: Codable {
-    let key: String?
+    let countryName: String?
     let countryFlag: String?
     let currency: String?
 }

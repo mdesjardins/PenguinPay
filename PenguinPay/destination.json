@@ -2,24 +2,24 @@
     {
         "continent": "Africa",
         "continentFlag": "url",
-        "Countrys": [
+        "countrys": [
             {
-                "key": "Nigeria",
+                "countryName": "Nigeria",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/nigeria.png",
-                "currency": "NGN"
+                "currency": "NGN",
             },
             {
-                "key": "Kenya",
+                "countryName": "Kenya",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/kenya.png",
                 "currency": "BRL"
             },
             {
-                "key": "Tanzania",
+                "countryName": "Tanzania",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/tanzania.png",
                 "currency": "TZS"
             },
             {
-                "key": "Uganda",
+                "countryName": "Uganda",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/uganda.png",
                 "currency": "UGX"
             }
@@ -28,14 +28,14 @@
     {
         "continent": "South America",
         "continentFlag": "url",
-        "Countrys": [
+        "countrys": [
             {
-                "key": "Brazil",
+                "countryName": "Brazil",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.us-east-1.amazonaws.com/flags/brazil.png",
                 "currency": "BRL"
             },
             {
-                "key": "Argentina",
+                "countryName": "Argentina",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/argentina.png",
                 "currency": "ARS"
             }
