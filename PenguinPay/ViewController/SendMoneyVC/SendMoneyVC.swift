@@ -40,51 +40,41 @@ class SendMoneyVC: UIViewController {
     @objc func handleClose() {
         self.dismiss(animated: true)
     }
-    
-    private func doTransition(for view: UIView) {
-        view.subviews.vi
-        view.subviews.forEach { (component) in
-            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {
-                component.alpha = 0
-                component.transform = CGAffineTransform(translationX: 0, y: -10)
-            }) { (_) in
-                //                self.iconImageView.sd_setImage(with: URL(string: item?.icon ?? ""))
-                //                self.titleLabel.text = item?.name
-                //                self.descriptionLabel.text = item?.info
-                component.transform = CGAffineTransform(translationX: 0, y: 10)
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {
-                    component.alpha = 1
-                    component.transform = .identity
-                })
-            }
-        }
-    }
-    
+        
     //MARK: - Subscriptions
     private func componentsSubscriptions() {
         
         //Start button
-        sendMoneyInitialView.sendButton.bindableCompletedTouch.bind { _ in
+        sendMoneyInitialView?.sendButton.bindableCompletedTouch.bind { _ in
             self.handleStart()
         }
         
         //Country selected, change the UI
         sendMoneyVM?.bindableCountrySelected.bind { _ in
             self.cardView?.dismiss(animated: true, completion: {
-                self.doTransition(for: self.sendMoneyInitialView)
+                self.transactionVC = TransactionVC()
+                self.transactionVC?.sendMoneyVM = self.sendMoneyVM                
+                self.view.add(self.transactionVC?.view ?? UIView()) {
+                    $0.alpha = 0
+                    $0.transform = .init(translationX: 0, y: -10)
+                    $0.fillSuperview(padding:
+                        .init(top: 50, left: 0, bottom: 0, right: 0)
+                    )
+                }
+                self.transitionFrom(from: self.sendMoneyInitialView, to: self.transactionVC?.view)
             })
         }
-    }
+    }        
     
     //MARK: Setup
-    private func setupComponents() {
-        
+    private func setupComponents() {        
         //navBar
         let barButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(handleClose))
         navigationItem.leftBarButtonItem = barButton
         
+        //Initial View
         sendMoneyInitialView = SendMoneyInitialView(frame: view.frame)
-        view.add(sendMoneyInitialView) {
+        view.add(sendMoneyInitialView ?? UIView()) {
             $0.fillSuperview()
         }
     }
@@ -94,11 +84,15 @@ class SendMoneyVC: UIViewController {
         navigationItem.title = "Adicionar novo"
     }
     
-    
     //MARK: Custom Views
-    var cardView: CardViewActivityVC?
-    var sendMoneyInitialView = SendMoneyInitialView()
-    let newView = configure(UIView()) {
-        $0.backgroundColor = .red
-    }
+    private var cardView: CardViewActivityVC?
+    private var sendMoneyInitialView: SendMoneyInitialView?
+    private var transactionVC: TransactionVC?
+}
+
+
+
+
+extension Notification.Name {
+     static let didReceiveData = Notification.Name("didReceiveData")
 }

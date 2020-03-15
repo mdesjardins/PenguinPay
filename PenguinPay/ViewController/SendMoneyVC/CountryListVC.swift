@@ -35,7 +35,7 @@ class CountryListVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         sendMoneyVM?.selectedCountry = sendMoneyVM?.selectedContinent?.countrys?[indexPath.row]
-        sendMoneyVM?.bindableCountrySelected.value = true
+        sendMoneyVM?.bindableCountrySelected.value = true        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,41 +46,4 @@ class CountryListVC: UITableViewController {
         cell.sendMoneyVM = sendMoneyVM
         return cell
     }
-}
-
-//MARK: - Continent Cell
-class CountryCell: UITableViewCell {
-    
-    var sendMoneyVM: SendMoneyViewModel? {
-        didSet {
-            setupData()
-        }
-    }
-    
-    private func setupData() {
-        let flag = URL(string: sendMoneyVM?.selectedCountry?.countryFlag ?? "")
-        countryListView.countryImageView.sd_setImage(with: flag)
-        countryListView.countryName.text = sendMoneyVM?.selectedCountry?.countryName
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        add(countryListView) {
-            $0.fillSuperview(padding:
-                .init(top: 0, left: 8, bottom: 0, right: 8)
-            )
-        }
-        accessoryType = .disclosureIndicator
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    static var identifier: String  {
-        return String(describing: self)
-    }
-    
-    //MARK: - custom views
-    let countryListView = CountryListView()
 }

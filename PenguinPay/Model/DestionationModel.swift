@@ -19,5 +19,6 @@ struct Country: Codable {
     let countryName: String?
     let countryFlag: String?
     let currency: String?
+    let placeholder: String?
 }
 
