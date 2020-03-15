@@ -37,7 +37,7 @@ class HomeVC: UIViewController {
                 self?.sendMoneyButton.animateButtonActivity(hasActivity: false)
                 let controller = SendMoneyVC()
                 controller.sendMoneyVM = self?.sendMoneyVM
-                let navController = UINavigationController(rootViewController: controller)
+                let navController = UINavigationController(rootViewController: controller)                
                 self?.present(navController, animated: true)
             }
         }) { [weak self] (err) in

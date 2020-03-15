@@ -10,11 +10,14 @@ import UIKit
 
 class TransactionReceiveView: UIView {
     
+    var sendMoneyVM: SendMoneyViewModel? {
+           didSet {
+               setupData()
+           }
+       }
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        backgroundColor = .tertiarySystemBackground
-        overrideUserInterfaceStyle = .dark
-        
         add(verticalStackView) {
             $0.fillSuperview()
             $0.addArrangedSubview(topSeparatorView)
@@ -27,6 +30,9 @@ class TransactionReceiveView: UIView {
         }
     }
 
+    private func setupData() {
+        receiveAmount.text = "\(sendMoneyVM?.transactionAmount ?? "") \(sendMoneyVM?.selectedCountry?.placeholder ?? "")"
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -48,7 +54,7 @@ class TransactionReceiveView: UIView {
     }
     
     let receiveLabel = configure(UILabel()) {
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         $0.textColor = .systemGray
         $0.constraintHeight(constant: 40)
         $0.text = "Receive"

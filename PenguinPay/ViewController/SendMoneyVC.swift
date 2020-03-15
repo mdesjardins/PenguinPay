@@ -15,7 +15,8 @@ import UIViewExtensionsSPM
 
 //MARK: Uploade VC
 class SendMoneyVC: UIViewController {
-    
+        
+    static var navController: UINavigationController?
     var sendMoneyVM: SendMoneyViewModel?
     
     override func viewDidLoad() {
@@ -27,16 +28,9 @@ class SendMoneyVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         componentsSubscriptions()
+        SendMoneyVC.navController = self.navigationController
     }
-    
-    @objc private func handleStart() {
-        let controller = ContinentsListVC()
-        controller.sendMoneyVM = sendMoneyVM
-        cardView = CardViewActivityVC(innerController: controller)
-        guard let card = cardView else { return }
-        self.present(card, animated: true)
-    }
-    
+        
     @objc func handleClose() {
         self.dismiss(animated: true)
     }
@@ -46,23 +40,9 @@ class SendMoneyVC: UIViewController {
         
         //Start button
         sendMoneyInitialView?.sendButton.bindableCompletedTouch.bind { _ in
-            self.handleStart()
-        }
-        
-        //Country selected, change the UI
-        sendMoneyVM?.bindableCountrySelected.bind { _ in
-            self.cardView?.dismiss(animated: true, completion: {
-                self.transactionVC = TransactionVC()
-                self.transactionVC?.sendMoneyVM = self.sendMoneyVM                
-                self.view.add(self.transactionVC?.view ?? UIView()) {
-                    $0.alpha = 0
-                    $0.transform = .init(translationX: 0, y: -10)
-                    $0.fillSuperview(padding:
-                        .init(top: 50, left: 0, bottom: 0, right: 0)
-                    )
-                }
-                self.transitionFrom(from: self.sendMoneyInitialView, to: self.transactionVC?.view)
-            })
+            let controller = TransactionVC()
+            controller.sendMoneyVM = self.sendMoneyVM
+            self.navigationController?.pushViewController(controller, animated: true)
         }
     }        
     
@@ -81,7 +61,7 @@ class SendMoneyVC: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        navigationItem.title = "Adicionar novo"
+        navigationItem.title = "Pinguin Pay"
     }
     
     //MARK: Custom Views

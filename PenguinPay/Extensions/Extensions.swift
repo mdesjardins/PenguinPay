@@ -8,33 +8,6 @@
 
 import UIKit
 
-extension UIViewController {
-    
-    func transitionFrom(from actualView: UIView?, to nextView: UIView?) {
-        actualView?.fadeOut {
-            nextView?.fadeIn()
-        }
-    }
-}
-
-extension UIView {
-    
-    func fadeOut(completion: @escaping() -> Void) {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.alpha = 0
-        }) { _ in
-            self.removeFromSuperview()
-            completion()
-        }
-    }
-    
-    func fadeIn() {
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {
-            self.alpha = 1
-            self.transform = .identity
-        }) 
-    }
-}
 
 extension String {
     func convertCurrencyToDouble() -> Double? {

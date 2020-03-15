@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import 
 
 class TransactionHeaderView: UIView {
     
@@ -18,24 +19,34 @@ class TransactionHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        add(horizontalStackView) {
+        
+        add(countryFlag) {
             $0.anchor(
                 top: nil,
                 leading: leadingAnchor,
+                bottom: nil, trailing: nil,
+                size: .init(width: 80, height: 80)
+            )
+            $0.centerY(axisY: centerYAnchor)
+        }
+        
+        add(verticalStackView) {
+            $0.anchor(
+                top: nil,
+                leading: countryFlag.trailingAnchor,
                 bottom: nil,
                 trailing: trailingAnchor
             )
-            $0.centerY(axisY: centerYAnchor)
-            $0.addArrangedSubview(countryFlag)
-            $0.addArrangedSubview(verticalStackView)
-            verticalStackView.addArrangedSubview(recipientName)
-            verticalStackView.addArrangedSubview(recipientPhone)
+            
         }
+        
     }
 
     private func setupData() {
         let url = URL(string: sendMoneyVM?.selectedCountry?.countryFlag ?? "")
-        countryFlag.sd_setImage(with: url)
+        countryFlag.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "secure"), options: .continueInBackground)
+//        recipientName.text = sendMoneyVM?.recipientName ?? "Chose a recipient"
+//        recipientPhone.text = sendMoneyVM?.recipientPhone ?? ""
     }
     
     required init?(coder: NSCoder) {
@@ -66,7 +77,9 @@ class TransactionHeaderView: UIView {
     }
     
     let countryFlag = configure(UIImageView()) {
-        $0.contentMode = .scaleAspectFit
-        $0.constraintWidth(constant: 50)
+        $0.contentMode = .scaleAspectFill
+        $0.constraintWidth(constant: 80)
+        $0.layer.cornerRadius = 80 / 2
+        $0.clipsToBounds = true
     }
 }

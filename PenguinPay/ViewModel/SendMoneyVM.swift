@@ -16,6 +16,8 @@ class SendMoneyViewModel {
     var selectedCountry: Country? { didSet { setupExchange() }}
     
     //Transaction View Controller
+    var recipientName: String?
+    var recipientPhone: String?
     var transactionAmount: String? {  didSet { print(transactionAmount?.toCurrencyFormat(locale: "ig_NG") ?? "")}}
     
     //MARK: Subscribers

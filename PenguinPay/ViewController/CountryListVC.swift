@@ -9,7 +9,7 @@
 import UIKit
 import CustomClassSPM
 
-class CountryListVC: UITableViewController {
+class CountryListVC: TableWithSearchVC {
     
     var sendMoneyVM: SendMoneyViewModel? {
         didSet {
@@ -34,6 +34,7 @@ class CountryListVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         sendMoneyVM?.selectedCountry = sendMoneyVM?.selectedContinent?.countrys?[indexPath.row]
         sendMoneyVM?.bindableCountrySelected.value = true        
     }

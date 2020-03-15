@@ -19,19 +19,26 @@ class TransactionCell: UITableViewCell {
     
     init(typeOfCell: TypeOfCell) {
         super.init(style: .default, reuseIdentifier: nil)
+        backgroundColor = .secondarySystemBackground
         switch typeOfCell {        
-        case .transactionhederCell:
+        case .transactionHeaderCell:
             add(transactionHeaderView) {
                 $0.fillSuperview(padding:
                     .init(top: 0, left: 16, bottom: 0, right: 32)
                 )
             }
             accessoryType = .disclosureIndicator
-        case .transactionTextField:
+        case .transactionReceiveCell:
             add(transactionReceiveView) {
                 $0.fillSuperview()
             }
+            
+        case .transactionAmountCell:
+            add(transactionAmountView) {
+                $0.fillSuperview()
+            }                
         }
+        
     }
     
     private func passingData() {
@@ -48,4 +55,5 @@ class TransactionCell: UITableViewCell {
     
     let transactionHeaderView = TransactionHeaderView()
     let transactionReceiveView = TransactionReceiveView()
+    let transactionAmountView = TransactionAmountView()
 }

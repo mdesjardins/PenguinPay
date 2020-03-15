@@ -16,11 +16,12 @@ class TransactionAmountView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         add(verticalStack) {
-            $0.fillSuperview()
-            $0.addArrangedSubview(title)
+            $0.centerInSuperview()
+            $0.addArrangedSubview(titleLabel)
             $0.addArrangedSubview(transactionTextField)
+            
         }
         transactionTextField.addTarget(self, action: #selector(handleTyping), for: .editingChanged)
     }
@@ -37,18 +38,22 @@ class TransactionAmountView: UIView {
     
     let verticalStack = configure(UIStackView()) {
         $0.axis = .vertical
+        $0.distribution = .fillProportionally
         $0.spacing = 8
     }
     
-    let title = configure(UILabel()) {
+    let titleLabel = configure(UILabel()) {
         $0.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        $0.text = "Send"
+        $0.text = "How much would you like to send?"
+        $0.textAlignment = .center
     }
     
-    let transactionTextField = configure(CustomFormTextField(placeholder: "Ksh 0.0")) {
+    let transactionTextField = configure(CustomFormTextField(placeholder: "0,00 Ksh")) {
         $0.addErrorMessage(message: "Invalid value")
         $0.font = UIFont.preferredFont(forTextStyle: .title1)
         $0.keyboardType = .decimalPad
+        $0.textAlignment = .center
+        $0.constraintHeight(constant: 60)
+        $0.backgroundColor = .clear
     }
 }
-
