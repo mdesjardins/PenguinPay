@@ -20,5 +20,8 @@ struct Country: Codable {
     let countryFlag: String?
     let currency: String?
     let placeholder: String?
+    let countryCode: String?
+    let locale: String?
+    let transactionLimit: Double?
 }
 

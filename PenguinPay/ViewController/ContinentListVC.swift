@@ -11,10 +11,15 @@ import UIKit
 //MARK: - Continent List
 class ContinentsListVC: UITableViewController {
     
-    var sendMoneyVM: SendMoneyViewModel?
+    var sendMoneyVM: SendMoneyViewModel?    
     
+    //MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialSetup()
+    }
+    
+    private func initialSetup() {
         tableView.separatorStyle = .none
         view.backgroundColor = .secondarySystemBackground
         navigationItem.title = "Select the continent"

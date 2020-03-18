@@ -23,6 +23,7 @@ class CountryListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Components
     
     let horizontalStackView = configure(UIStackView()) {
         $0.distribution = .fillProportionally        
@@ -32,8 +33,7 @@ class CountryListView: UIView {
     let countryImageView = configure(UIImageView()) {
         $0.contentMode = .scaleAspectFit
         $0.constraintWidth(constant: 50)
-    }
-        
+    }    
     let countryName = configure(UILabel()) {
         $0.font = UIFont.preferredFont(forTextStyle: .headline)
     }

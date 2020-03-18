@@ -29,8 +29,7 @@ class CountryCell: UITableViewCell {
             $0.fillSuperview(padding:
                 .init(top: 0, left: 8, bottom: 0, right: 8)
             )
-        }
-        accessoryType = .detailButton
+        }        
     }
     
     required init?(coder: NSCoder) {

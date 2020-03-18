@@ -45,7 +45,7 @@ class SendMoneyInitialView: UIView {
             bottomView.constraintHeight(constant: frame.height / 3)
             bottomView.add(sendButton) {
                 $0.centerInSuperview(size:
-                    .init(width: frame.width / 2, height: frame.width * 0.15)
+                    .init(width: frame.width - 32, height: frame.width * 0.15)
                 )
             }
         }
@@ -70,7 +70,7 @@ class SendMoneyInitialView: UIView {
        }
        
        let descriptionLabel = configure(UILabel()) {
-           $0.text = "Sendwave’s leading security experts and best-of-industry practices ensure your information is always secure."
+           $0.text = "PinguinPay leading security experts and best-of-industry practices ensure your information is always secure."
            $0.textAlignment = .center
            $0.numberOfLines = 0
            $0.adjustsFontSizeToFitWidth = true

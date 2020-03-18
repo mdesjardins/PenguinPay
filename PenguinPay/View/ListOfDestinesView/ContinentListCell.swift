@@ -17,9 +17,8 @@ class ContinentCell: UITableViewCell {
         }
     }
     
-    private func setupData() {
-        let flag = URL(string: sendMoneyVM?.selectedContinent?.continentFlag ?? "")
-        imageView?.sd_setImage(with: flag)
+    private func setupData() {                
+        textLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         textLabel?.text = sendMoneyVM?.selectedContinent?.continent
     }
     

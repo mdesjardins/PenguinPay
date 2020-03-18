@@ -7,25 +7,37 @@
                 "countryName": "Nigeria",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/nigeria.png",
                 "currency": "NGN",
-                "placeholder": "NGN"
+                "placeholder": "NGN",
+                "countryCode": "+234",
+                "locale": "ig_NG",
+                "transactionLimit": 5000000
             },
             {
                 "countryName": "Kenya",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/kenya.png",
                 "currency": "KES",
-                "placeholder": "ksh"
+                "placeholder": "ksh",
+                "countryCode": "+254",
+                "locale": "kam_KE",
+                "transactionLimit": 70000
             },
             {
                 "countryName": "Tanzania",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/tanzania.png",
                 "currency": "TZS",
-                "placeholder": "Tsh"
+                "placeholder": "Tsh",
+                "countryCode": "+255",
+                "locale": "mas_TZ",
+                "transactionLimit": 3000000
             },
             {
                 "countryName": "Uganda",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/uganda.png",
                 "currency": "UGX",
-                "placeholder": "UGX"
+                "placeholder": "UGX",
+                "countryCode": "+256",
+                "locale": "xog_UG",
+                "transactionLimit": 4000000
             }
         ]
     },
@@ -37,13 +49,15 @@
                 "countryName": "Brazil",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.us-east-1.amazonaws.com/flags/brazil.png",
                 "currency": "BRL",
-                "placeholder": "R$"
+                "placeholder": "R$",
+                "countryCode": "+55"
             },
             {
                 "countryName": "Argentina",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/argentina.png",
                 "currency": "ARS",
                 "placeholder": "$",
+                "countryCode": "+54"
             }
         ]
     }

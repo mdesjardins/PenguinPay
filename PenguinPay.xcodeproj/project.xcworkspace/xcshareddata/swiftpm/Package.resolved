@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/Alvathor/CustomClassSPM.git",
         "state": {
           "branch": "master",
-          "revision": "7136305631b3e97645cab77d7354f344f435dcbe",
+          "revision": "a8221dd496111869e69bdaadb07d7f8b78faec0d",
           "version": null
         }
       },
@@ -42,7 +42,7 @@
         "repositoryURL": "https://github.com/Alvathor/UIViewExtensionsSPM",
         "state": {
           "branch": "master",
-          "revision": "8a268c2206554d4ee4f52ce3da0b5db1e8edf65f",
+          "revision": "48247b29f6a0aeda00f461b3d6be6071fd698a0d",
           "version": null
         }
       }

@@ -11,16 +11,16 @@ import UIViewExtensionsSPM
 
 class TransactionCell: UITableViewCell {
     
-    var sendMoneyVM: SendMoneyViewModel? {
-        didSet {
-            passingData()
-        }
-    }
+    var sendMoneyVM: SendMoneyViewModel? { didSet { passingData() }}
     
     init(typeOfCell: TypeOfCell) {
         super.init(style: .default, reuseIdentifier: nil)
         backgroundColor = .secondarySystemBackground
-        switch typeOfCell {        
+        initialSetup(typeOfCell)
+    }
+    
+    private func initialSetup(_ typeOfCell: TypeOfCell) {
+        switch typeOfCell {
         case .transactionHeaderCell:
             add(transactionHeaderView) {
                 $0.fillSuperview(padding:
@@ -34,26 +34,33 @@ class TransactionCell: UITableViewCell {
             }
             
         case .transactionAmountCell:
-            add(transactionAmountView) {
+            add(transactionSenderView) {
                 $0.fillSuperview()
-            }                
+            }
+        default:
+            break
         }
-        
     }
     
     private func passingData() {
-        transactionHeaderView.sendMoneyVM = sendMoneyVM        
+        transactionHeaderView.sendMoneyVM = sendMoneyVM
+        transactionSenderView.sendMoneyVM = sendMoneyVM
+        transactionReceiveView.sendMoneyVM = sendMoneyVM
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+ 
     static var identifier: String {
         return String(describing: self)
     }
     
     let transactionHeaderView = TransactionHeaderView()
     let transactionReceiveView = TransactionReceiveView()
-    let transactionAmountView = TransactionAmountView()
+    let transactionSenderView = TransactionSenderView()
+    
+    //Override init
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

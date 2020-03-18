@@ -22,6 +22,7 @@ class CountryListVC: TableWithSearchVC {
         tableView.separatorStyle = .none
         view.backgroundColor = .secondarySystemBackground
         navigationItem.title = "Select the country"
+        navigationItem.hidesSearchBarWhenScrolling = false
         tableView.register(CountryCell.self, forCellReuseIdentifier: CountryCell.identifier)
     }
     

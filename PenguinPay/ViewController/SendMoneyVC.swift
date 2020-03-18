@@ -9,7 +9,6 @@
 import UIKit
 import SwiftUI
 import SDWebImage
-import CardViewSPM
 import CustomClassSPM
 import UIViewExtensionsSPM
 
@@ -17,8 +16,9 @@ import UIViewExtensionsSPM
 class SendMoneyVC: UIViewController {
         
     static var navController: UINavigationController?
-    var sendMoneyVM: SendMoneyViewModel?
+    var sendMoneyVM = SendMoneyViewModel()
     
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -30,49 +30,51 @@ class SendMoneyVC: UIViewController {
         componentsSubscriptions()
         SendMoneyVC.navController = self.navigationController
     }
-        
-    @objc func handleClose() {
-        self.dismiss(animated: true)
-    }
-        
+    
     //MARK: - Subscriptions
-    private func componentsSubscriptions() {
-        
+    private func componentsSubscriptions() {        
         //Start button
         sendMoneyInitialView?.sendButton.bindableCompletedTouch.bind { _ in
-            let controller = TransactionVC()
-            controller.sendMoneyVM = self.sendMoneyVM
-            self.navigationController?.pushViewController(controller, animated: true)
+            self.handleStart()
         }
-    }        
+    }
     
-    //MARK: Setup
-    private func setupComponents() {        
-        //navBar
-        let barButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(handleClose))
-        navigationItem.leftBarButtonItem = barButton
-        
+    //MARK: - Networking
+    private func handleStart() {
+        sendMoneyInitialView?.sendButton.animateButtonActivity(hasActivity: true)
+        sendMoneyVM.getCurrencies(onSuccess: { [weak self] in
+            DispatchQueue.main.async {
+                self?.sendMoneyInitialView?.sendButton.animateButtonActivity(hasActivity: false)
+                self?.pushToTransaction()
+            }
+        }) { [weak self] (err) in
+            self?.sendMoneyInitialView?.sendButton.animateButtonActivity(hasActivity: false)
+            self?.showCenterAlert(title: "", msg: err)
+        }
+    }
+    
+    private func pushToTransaction() {
+        let controller = TransactionVC()
+        controller.sendMoneyVM = self.sendMoneyVM
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    //MARK: - Setup
+    private func setupComponents() {
         //Initial View
         sendMoneyInitialView = SendMoneyInitialView(frame: view.frame)
         view.add(sendMoneyInitialView ?? UIView()) {
-            $0.fillSuperview()
+            $0.fillSuperview(padding:
+                .init(top: returningSafetyArea().top + 16, left: 0, bottom: 0, right: 0)
+            )
         }
     }
     
-    private func setupView() {
+    private func setupView() {        
         view.backgroundColor = .systemBackground
         navigationItem.title = "Pinguin Pay"
     }
     
-    //MARK: Custom Views
-    private var cardView: CardViewActivityVC?
+    //MARK: Custom View
     private var sendMoneyInitialView: SendMoneyInitialView?
-    private var transactionVC: TransactionVC?
-}
-
-
-
-
-extension Notification.Name {
-     static let didReceiveData = Notification.Name("didReceiveData")
 }

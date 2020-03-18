@@ -7,15 +7,10 @@
 //
 
 import UIKit
-import 
 
 class TransactionHeaderView: UIView {
     
-    var sendMoneyVM: SendMoneyViewModel? {
-        didSet {
-            setupData()
-        }
-    }
+    var sendMoneyVM: SendMoneyViewModel? { didSet { setupData() }}
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -35,50 +30,45 @@ class TransactionHeaderView: UIView {
                 top: nil,
                 leading: countryFlag.trailingAnchor,
                 bottom: nil,
-                trailing: trailingAnchor
+                trailing: trailingAnchor,
+                padding: .init(top: 0, left: 16, bottom: 0, right: 0)
             )
-            
+            $0.centerY(axisY: centerYAnchor)
+            $0.addArrangedSubview(recipientName)
+            $0.addArrangedSubview(recipientPhone)
         }
-        
     }
 
     private func setupData() {
         let url = URL(string: sendMoneyVM?.selectedCountry?.countryFlag ?? "")
         countryFlag.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "secure"), options: .continueInBackground)
-//        recipientName.text = sendMoneyVM?.recipientName ?? "Chose a recipient"
-//        recipientPhone.text = sendMoneyVM?.recipientPhone ?? ""
+        recipientName.text = sendMoneyVM?.recipientName ?? "Recipient name"
+        recipientPhone.text = "\(sendMoneyVM?.selectedCountry?.countryCode ?? "") \(sendMoneyVM?.recipientPhone ?? "Recipient phone")"
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let horizontalStackView = configure(UIStackView()) {
-        $0.axis = .horizontal
-        $0.distribution = .fillProportionally
-        $0.spacing = 9
-    }
     
+    //MARK: - Components
     
     let verticalStackView = configure(UIStackView()) {
         $0.axis = .vertical
         $0.distribution = .fillProportionally
     }
-    
     let recipientName = configure(UILabel()) {
         $0.font = UIFont.preferredFont(forTextStyle: .title1)
         $0.text = "Juiano alvarenga"
         $0.constraintHeight(constant: 35)
+        $0.restorationIdentifier = "name"
     }
-    
     let recipientPhone = configure(UILabel()) {
         $0.font = UIFont.preferredFont(forTextStyle: .footnote)
         $0.text = "+55 27 999968-8281"
     }
-    
     let countryFlag = configure(UIImageView()) {
         $0.contentMode = .scaleAspectFill
-        $0.constraintWidth(constant: 80)
         $0.layer.cornerRadius = 80 / 2
         $0.clipsToBounds = true
     }

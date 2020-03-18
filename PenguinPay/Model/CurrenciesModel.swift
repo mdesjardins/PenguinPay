@@ -14,5 +14,5 @@ struct CurrenciesModel: Codable {
     let license: String?
     let timestamp: Int?
     let base: String?
-    let rates: [String: Double]?
+    let rates: [String: Double]?    
 }
