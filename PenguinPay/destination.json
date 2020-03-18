@@ -50,14 +50,18 @@
                 "countryFlag": "https://insurance-pool-wallet-media.s3.us-east-1.amazonaws.com/flags/brazil.png",
                 "currency": "BRL",
                 "placeholder": "R$",
-                "countryCode": "+55"
+                "countryCode": "+55",
+                "locale": "pt_BR",
+                "transactionLimit": 500000
             },
             {
                 "countryName": "Argentina",
                 "countryFlag": "https://insurance-pool-wallet-media.s3.amazonaws.com/flags/argentina.png",
                 "currency": "ARS",
                 "placeholder": "$",
-                "countryCode": "+54"
+                "countryCode": "+54",
+                "locale": "es_AR",
+                "transactionLimit": 300000
             }
         ]
     }

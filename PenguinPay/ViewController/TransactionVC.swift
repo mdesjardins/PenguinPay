@@ -120,6 +120,7 @@ class TransactionVC: UITableViewController  {
     
     private func handleClick(in button: FormButtonActive) {
         button.animateButtonActivity(hasActivity: true)
+        view.endEditing(true)
         var timer: Timer?
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (_) in

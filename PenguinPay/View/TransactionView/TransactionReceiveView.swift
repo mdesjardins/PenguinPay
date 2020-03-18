@@ -56,9 +56,7 @@ class TransactionReceiveView: UIView {
         $0.constraintHeight(constant: 30)
     }
     let receiveLabel = configure(UILabel()) {
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        $0.textColor = .systemGray
-        $0.constraintHeight(constant: 40)
+        $0.font = UIFont.systemFont(ofSize: 20, weight: .regular)                
         $0.text = "Receive"
         $0.textAlignment = .center
     }

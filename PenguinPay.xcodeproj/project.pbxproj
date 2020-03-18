@@ -10,7 +10,6 @@
 		C00C73C4241BF3D9007188D8 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C00C73C3241BF3D9007188D8 /* SDWebImage */; };
 		C00DEFDD241D80380064CFAB /* CustomFormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DEFDC241D80380064CFAB /* CustomFormTextField.swift */; };
 		C00DEFDF241D86870064CFAB /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DEFDE241D86870064CFAB /* TransactionCell.swift */; };
-		C00DEFE1241D87520064CFAB /* CustomTextFieldToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DEFE0241D87520064CFAB /* CustomTextFieldToolBar.swift */; };
 		C00DEFE3241DC28E0064CFAB /* TransactionSenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DEFE2241DC28E0064CFAB /* TransactionSenderView.swift */; };
 		C0187A86241E8B53001B0394 /* TransactionReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0187A85241E8B53001B0394 /* TransactionReceiveView.swift */; };
 		C0187A8B241E8BFB001B0394 /* TransactionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0187A8A241E8BFB001B0394 /* TransactionHeaderView.swift */; };
@@ -50,7 +49,6 @@
 /* Begin PBXFileReference section */
 		C00DEFDC241D80380064CFAB /* CustomFormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFormTextField.swift; sourceTree = "<group>"; };
 		C00DEFDE241D86870064CFAB /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
-		C00DEFE0241D87520064CFAB /* CustomTextFieldToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldToolBar.swift; sourceTree = "<group>"; };
 		C00DEFE2241DC28E0064CFAB /* TransactionSenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSenderView.swift; sourceTree = "<group>"; };
 		C0187A85241E8B53001B0394 /* TransactionReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionReceiveView.swift; sourceTree = "<group>"; };
 		C0187A8A241E8BFB001B0394 /* TransactionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHeaderView.swift; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 		C0FE6C82241B96D9002D41EC /* CurrenciesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesModel.swift; sourceTree = "<group>"; };
 		C0FE6C84241B99E0002D41EC /* SendMoneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyVC.swift; sourceTree = "<group>"; };
 		C0FE6C86241B9BF7002D41EC /* SendMoneyVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyVM.swift; sourceTree = "<group>"; };
-		C0FE6C8B241BA30A002D41EC /* testimonial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testimonial.mp4; sourceTree = "<group>"; };
 		C0FE6C92241BEE82002D41EC /* destination.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = destination.json; path = PenguinPay/destination.json; sourceTree = SOURCE_ROOT; };
 		C0FE6C98241BF244002D41EC /* DestionationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestionationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				C00DEFDC241D80380064CFAB /* CustomFormTextField.swift */,
-				C00DEFE0241D87520064CFAB /* CustomTextFieldToolBar.swift */,
 				C0187A8E241EA93F001B0394 /* TableWithSearchVC.swift */,
 				C0187A91241ECD8C001B0394 /* FormTextField.swift */,
 			);
@@ -223,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				C0FE6C92241BEE82002D41EC /* destination.json */,
-				C0FE6C8B241BA30A002D41EC /* testimonial.mp4 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -358,7 +353,6 @@
 				C00DEFDF241D86870064CFAB /* TransactionCell.swift in Sources */,
 				C00DEFE3241DC28E0064CFAB /* TransactionSenderView.swift in Sources */,
 				C0FE6C85241B99E0002D41EC /* SendMoneyVC.swift in Sources */,
-				C00DEFE1241D87520064CFAB /* CustomTextFieldToolBar.swift in Sources */,
 				C0212AAF241C254300E02C43 /* CountryListView.swift in Sources */,
 				C0187A9B241F07C9001B0394 /* NewRecipientVC.swift in Sources */,
 				C0187A86241E8B53001B0394 /* TransactionReceiveView.swift in Sources */,

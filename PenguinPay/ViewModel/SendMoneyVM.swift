@@ -11,12 +11,14 @@ import UIViewExtensionsSPM
 
 class SendMoneyViewModel {            
     
-    //CardView List of Destines
+    //MARK: Variables
+    //CardView List of Destines     
     var selectedContinent: Destination? 
     var selectedCountry: Country? { didSet { initialSetup() }}
+    var filteredCountrys: [Country]?
+    var currecies: CurrenciesModel?
     
     //Transaction View Controller
-    var currecies: CurrenciesModel?
     var recipientName: String? { didSet { updateName() }}
     var numberOfCharacters: [String]? { didSet { checkNameValidity() }}
     var recipientPhone: String? { didSet { checkAndUpdatePhone() }}
@@ -25,20 +27,21 @@ class SendMoneyViewModel {
     var formattedLocaleTransactionAmount: String? { didSet { checkOutput()}}
     var formattedBinaryDestineAmount: String? { didSet { checkOutput()}}
     var shouldShowBinary: Bool? { didSet { checkOutput()}}
-    var isPhoneValid: Bool? { didSet { checkWarningDisplay() }}
-    var isNameValid: Bool? { didSet { checkWarningDisplay() }}
+    var isPhoneValid: Bool? { didSet { checkNameAndPhoneWarningDisplay() }}
+    var isNameValid: Bool? { didSet { checkNameAndPhoneWarningDisplay() }}
     
     //MARK: Subscribers
+    
     //Updates ui
     var bindableResetData = Bindable<Bool>()
     var bindableShowBinary = Bindable<Bool>()
     var bindableUpdateCountryFlag = Bindable<URL>()
     var bindableUpdateName = Bindable<String>()
     var bindableUpdatePhone = Bindable<String>()
-    var bindableWarningNameAndPhone = Bindable<Bool>()
     var bindableUpdateDestineLocale = Bindable<String>()
     var bindableUpdateDestinaBinary = Bindable<String>()
     var bindableCountrySelected = Bindable<Bool>()
+    var bindableWarningNameAndPhone = Bindable<Bool>()
     var bindableAmountWarning = Bindable<String>()
     
     //Validations
@@ -78,14 +81,10 @@ class SendMoneyViewModel {
         let isNameValid = bindableNameValid.value ?? false
         let isPhoneValid = bindablePhoneValid.value ?? false
         let isAmountValid = bindableAmountValid.value ?? false
-        
-        print(isNameValid)
-        print(isPhoneValid)
-        print(isAmountValid)
+
         bindableAbleToSendMoney.value = isNameValid && isPhoneValid && isAmountValid
     }
-    
-    
+        
     /// check if should return binaia or locale currency
     private func checkOutput() {
         bindableShowBinary.value = shouldShowBinary ?? false
@@ -97,12 +96,15 @@ class SendMoneyViewModel {
     
     private func checkAndUpdatePhone() {
         let phone = "\(selectedCountry?.countryCode ?? "") \(recipientPhone ?? "")"
-        bindableUpdatePhone.value = phone                
+        bindableUpdatePhone.value = phone
+        
         if phone.pureNumbers().isValidPhone {
             bindablePhoneValid.value = true
         } else {
             bindablePhoneValid.value = false
         }
+        
+        //Validate the whole transaction
         transactionValidation()
     }
         
@@ -118,6 +120,8 @@ class SendMoneyViewModel {
         formattedBinaryDestineAmount = returnBinaryValues(transactionAmount: self.transactionAmount, destineAmount: destineAmout)
         formattedLocaleTransactionAmount = returnLocaleValues(transactionAmount: self.transactionAmount, destineAmout: destineAmout)
         checkAmoutValidity(for: multiplierFactor)
+        
+        //Validate the whole transaction
         transactionValidation()
     }
     
@@ -167,11 +171,14 @@ class SendMoneyViewModel {
                     self.bindableNameValid.value = false
                 }
             }
+            
+            //Validate the whole transaction
             self.transactionValidation()
         }
     }
     
-    private func checkWarningDisplay() {
+    //For name and Phone
+    private func checkNameAndPhoneWarningDisplay() {
         let isPhoneValid = bindablePhoneValid.value ?? false
         let isNameValid = bindableNameValid.value ?? false
         

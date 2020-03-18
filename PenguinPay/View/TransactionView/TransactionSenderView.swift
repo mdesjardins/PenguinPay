@@ -87,8 +87,7 @@ class TransactionSenderView: UIView {
     }
     
     private func setupData() {
-        transactionTextField.text = sendMoneyVM?.transactionAmount ?? "0.0"
-        transactionTextField.placeholder = sendMoneyVM?.selectedCountry?.placeholder
+        transactionTextField.text = sendMoneyVM?.transactionAmount
     }
     
     
@@ -156,7 +155,7 @@ class TransactionSenderView: UIView {
         $0.textAlignment = .center
         $0.constraintHeight(constant: 20)
     }
-    var transactionTextField = configure(CustomFormTextField(placeholder: "0,00")) {
+    var transactionTextField = configure(CustomFormTextField(placeholder: "$0.00")) {
         $0.addErrorMessage(message: "Invalid value")
         $0.font = UIFont.preferredFont(forTextStyle: .title1)
         $0.keyboardType = .decimalPad
