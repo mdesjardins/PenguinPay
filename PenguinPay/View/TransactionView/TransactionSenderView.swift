@@ -30,8 +30,9 @@ class TransactionSenderView: UIView {
             $0.centerInSuperview(size:
                 .init(width: 200, height: 0)
             )
-            $0.addArrangedSubview(titleLabel)
+            
             $0.addArrangedSubview(transactionTextField)
+            $0.addArrangedSubview(titleLabel)
             $0.addArrangedSubview(binaryStackView)
                                                 
             //Binary Radio
@@ -86,7 +87,8 @@ class TransactionSenderView: UIView {
     }
     
     private func setupData() {
-        transactionTextField.text = sendMoneyVM?.transactionAmount
+        transactionTextField.text = sendMoneyVM?.transactionAmount ?? "0.0"
+        transactionTextField.placeholder = sendMoneyVM?.selectedCountry?.placeholder
     }
     
     
@@ -152,6 +154,7 @@ class TransactionSenderView: UIView {
         $0.font = UIFont.preferredFont(forTextStyle: .subheadline)
         $0.text = "Amount to be send"
         $0.textAlignment = .center
+        $0.constraintHeight(constant: 20)
     }
     var transactionTextField = configure(CustomFormTextField(placeholder: "0,00")) {
         $0.addErrorMessage(message: "Invalid value")

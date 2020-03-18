@@ -25,14 +25,17 @@ class SendMoneyViewModel {
     var formattedLocaleTransactionAmount: String? { didSet { checkOutput()}}
     var formattedBinaryDestineAmount: String? { didSet { checkOutput()}}
     var shouldShowBinary: Bool? { didSet { checkOutput()}}
+    var isPhoneValid: Bool? { didSet { checkWarningDisplay() }}
+    var isNameValid: Bool? { didSet { checkWarningDisplay() }}
     
     //MARK: Subscribers
-    
     //Updates ui
+    var bindableResetData = Bindable<Bool>()
     var bindableShowBinary = Bindable<Bool>()
     var bindableUpdateCountryFlag = Bindable<URL>()
     var bindableUpdateName = Bindable<String>()
     var bindableUpdatePhone = Bindable<String>()
+    var bindableWarningNameAndPhone = Bindable<Bool>()
     var bindableUpdateDestineLocale = Bindable<String>()
     var bindableUpdateDestinaBinary = Bindable<String>()
     var bindableCountrySelected = Bindable<Bool>()
@@ -40,34 +43,50 @@ class SendMoneyViewModel {
     
     //Validations
     var bindableNameValid = Bindable<Bool>()
-    var isBindablePhoneValid = Bindable<Bool>()
+    var bindablePhoneValid = Bindable<Bool>()
     var bindableAmountValid = Bindable<Bool>()
     var bindableAbleToSendMoney = Bindable<Bool>()
     
     //MARK: setup and and subscriptions
-       private func initialSetup() {
-           setupCountry()
-           setupBinarySubscription()
-       }
-       
-       private func setupBinarySubscription() {
-           bindableShowBinary.bind { (showBinary) in
-               if showBinary ?? false  {
-                   self.bindableUpdateDestinaBinary.value = self.formattedBinaryDestineAmount
-               } else {
-                   self.bindableUpdateDestineLocale.value = self.formattedLocaleTransactionAmount
-               }
-           }
-       }
-       
-       private func setupCountry() {
-           if selectedCountry == nil {
-               selectedCountry = continents[0].countrys?[0]
-           }
-           bindableUpdateCountryFlag.value = URL(string: selectedCountry?.countryFlag ?? "")
-       }
+    private func initialSetup() {
+        setupCountry()
+        setupBinarySubscription()
+        resetData()
+    }
     
-    //MARK: - update functions
+    private func setupBinarySubscription() {
+        bindableShowBinary.bind { (showBinary) in
+            if showBinary ?? false  {
+                self.bindableUpdateDestinaBinary.value = self.formattedBinaryDestineAmount
+            } else {
+                self.bindableUpdateDestineLocale.value = self.formattedLocaleTransactionAmount
+            }
+        }
+    }
+    
+    private func setupCountry() {
+        if selectedCountry == nil {
+            selectedCountry = continents[0].countrys?[0]
+        }
+        bindableUpdateCountryFlag.value = URL(string: selectedCountry?.countryFlag ?? "")
+    }
+    
+    //MARK: - update and check functions
+       
+    /// Check is all is good for a transaction
+    private func transactionValidation() {
+        let isNameValid = bindableNameValid.value ?? false
+        let isPhoneValid = bindablePhoneValid.value ?? false
+        let isAmountValid = bindableAmountValid.value ?? false
+        
+        print(isNameValid)
+        print(isPhoneValid)
+        print(isAmountValid)
+        bindableAbleToSendMoney.value = isNameValid && isPhoneValid && isAmountValid
+    }
+    
+    
+    /// check if should return binaia or locale currency
     private func checkOutput() {
         bindableShowBinary.value = shouldShowBinary ?? false
     }
@@ -78,22 +97,15 @@ class SendMoneyViewModel {
     
     private func checkAndUpdatePhone() {
         let phone = "\(selectedCountry?.countryCode ?? "") \(recipientPhone ?? "")"
-        bindableUpdatePhone.value = phone
-        if phone.count > 8 {
-            isBindablePhoneValid.value = true
+        bindableUpdatePhone.value = phone                
+        if phone.pureNumbers().isValidPhone {
+            bindablePhoneValid.value = true
         } else {
-            isBindablePhoneValid.value = false
+            bindablePhoneValid.value = false
         }
+        transactionValidation()
     }
-    
-    //MARK: - Check Functions
-    private func isAbleToSendMoney() {
-        let isNameValid = bindableNameValid.value ?? false
-        let isPhoneValid = isBindablePhoneValid.value ?? false
-        let isAmountValid = bindableAmountValid.value ?? false
         
-        bindableAbleToSendMoney.value = isNameValid && isPhoneValid && isAmountValid
-    }
     
     private func calculateRateExchange() {
         let currency = selectedCountry?.currency ?? ""
@@ -106,6 +118,7 @@ class SendMoneyViewModel {
         formattedBinaryDestineAmount = returnBinaryValues(transactionAmount: self.transactionAmount, destineAmount: destineAmout)
         formattedLocaleTransactionAmount = returnLocaleValues(transactionAmount: self.transactionAmount, destineAmout: destineAmout)
         checkAmoutValidity(for: multiplierFactor)
+        transactionValidation()
     }
     
     private func returnBinaryValues(transactionAmount origin: String?, destineAmount: String?) -> String {
@@ -133,16 +146,36 @@ class SendMoneyViewModel {
             let mutiplierString = String(format: "%.0f", locale: nil, multiplierFactor)
             let formattedExchange = mutiplierString.toCurrencyFormat(locale: selectedCountry?.locale ?? "")
             bindableAmountWarning.value = "1 $ = \(formattedExchange) with no fee"
-            bindableAmountValid.value = true
+            if (transactionAmount?.isEmpty ?? false) || transactionAmount == nil {
+                bindableAmountValid.value = false
+            } else {
+                bindableAmountValid.value = true
+            }
         }
     }
     
     private func checkNameValidity() {
-        if (numberOfCharacters?.count ?? 0) > 1 {
-            bindableNameValid.value = true
-        } else {
-            bindableNameValid.value = false
+        var timer: Timer?
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { (_) in
+            if (self.numberOfCharacters?.count ?? 0) > 1 {
+                self.bindableNameValid.value = true
+            } else {
+                if self.recipientName?.isEmpty ?? false {
+                    self.bindableNameValid.value = true
+                } else {
+                    self.bindableNameValid.value = false
+                }
+            }
+            self.transactionValidation()
         }
+    }
+    
+    private func checkWarningDisplay() {
+        let isPhoneValid = bindablePhoneValid.value ?? false
+        let isNameValid = bindableNameValid.value ?? false
+        
+        bindableWarningNameAndPhone.value = isPhoneValid && isNameValid
     }
     
     //MARK: - Networking
@@ -164,6 +197,16 @@ class SendMoneyViewModel {
     }
     
     //MARK: helper functions
+    
+    func resetData() {
+        recipientPhone?.removeAll()
+        bindableUpdatePhone.value?.removeAll()
+        transactionAmount?.removeAll()
+        formattedBinaryDestineAmount?.removeAll()
+        formattedLocaleTransactionAmount?.removeAll()
+        bindableResetData.value = true
+    }
+    
     func returnCountry() -> CountryCurrencies {
         switch selectedCountry?.currency {
         case CountryCurrencies.kenya.rawValue:
@@ -196,14 +239,4 @@ enum CountryCurrencies: String {
     case nigeria = "NGN"
     case tanzania = "TZS"
     case uganda = "UGX"
-}
-
-extension String {
-
-    func isValidPhone() -> Bool {
-        let phoneRegex = "^[0-9]{6,14}$";
-        let valid = NSPredicate(format: "SELF MATCHES %@", phoneRegex).evaluate(with: self)
-        return valid
-        
-    }
 }

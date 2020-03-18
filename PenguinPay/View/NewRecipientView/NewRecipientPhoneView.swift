@@ -12,12 +12,7 @@ class NewRecipientPhoneView: UIView {
     
     var changedString = ""
     
-    var sendMoneyVM: SendMoneyViewModel? {
-        didSet {
-            setupData()
-            setupSubscriptions()
-        }
-    }
+    var sendMoneyVM: SendMoneyViewModel? { didSet { setupData() }}
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,16 +31,7 @@ class NewRecipientPhoneView: UIView {
         countryCodeLabel.text = sendMoneyVM?.selectedCountry?.countryCode
         phoneTextField.text = sendMoneyVM?.recipientPhone
     }
-    private func setupSubscriptions() {
-//        sendMoneyVM?.bindableNameValid.bind{ isValid in
-//            if isValid ?? false {
-//                self.phoneTextField.showErrorMessage(status: .hide)
-//            } else {
-//                self.phoneTextField.showErrorMessage(status: .show)
-//            }
-//        }
-    }
-    
+
     public func formatCurrency(
          limiting limit: Int,_ string: String,
          _ textField: UITextField,range: NSRange,completion:(String) -> Void) -> Bool {
@@ -60,16 +46,8 @@ class NewRecipientPhoneView: UIView {
      }
     
     func changeString(_ string: String, _ textField: UITextField, range: NSRange) -> String {
-        var limit = 0
-        switch sendMoneyVM?.returnCountry() {
-        case .nigeria:
-            limit = 12
-        default:
-            limit = 11
-        }
-        if string.count > 0 && textField.text!.count < limit {
-            changedString += string
-            let _ = changedString.addMaxCharacteres(max: limit)
+        if string.count > 0  {
+            changedString += string            
             let newString = changedString.formattedPhone(for: sendMoneyVM?.returnCountry() ?? CountryCurrencies.nigeria)
             textField.text = newString
         } else {
@@ -80,6 +58,7 @@ class NewRecipientPhoneView: UIView {
             } else {
                 changedString = String(changedString.dropLast())
                 textField.text = changedString
+                 
             }            
         }
         return textField.text ?? ""
@@ -108,5 +87,6 @@ class NewRecipientPhoneView: UIView {
     let phoneTextField = configure(CustomDefaultTextField()) {
         $0.addErrorMessage(message: "Invalid number")
         $0.placeholder = "788 888888"
+        $0.keyboardType = .numberPad
     }
 }

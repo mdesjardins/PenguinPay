@@ -17,7 +17,9 @@ class TransactionReceiveView: UIView {
         add(verticalStackView) {
             $0.fillSuperview()
             $0.addArrangedSubview(topSeparatorView)
-            $0.addArrangedSubview(receiveLabel)
+            topSeparatorView.add(receiveLabel) {
+                $0.fillSuperview()
+            }
             $0.addArrangedSubview(amoutHolderView)
             amoutHolderView.add(receiveAmount) {
                 $0.centerInSuperview(size:

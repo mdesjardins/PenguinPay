@@ -36,6 +36,9 @@ class TransactionHeaderView: UIView {
             $0.centerY(axisY: centerYAnchor)
             $0.addArrangedSubview(recipientName)
             $0.addArrangedSubview(recipientPhone)
+            recipientName.add(invalidLabel) {
+                $0.anchor(top: recipientPhone.bottomAnchor, leading: recipientPhone.leadingAnchor, bottom: nil, trailing: recipientPhone.trailingAnchor)
+            }
         }
     }
 
@@ -43,7 +46,7 @@ class TransactionHeaderView: UIView {
         let url = URL(string: sendMoneyVM?.selectedCountry?.countryFlag ?? "")
         countryFlag.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "secure"), options: .continueInBackground)
         recipientName.text = sendMoneyVM?.recipientName ?? "Recipient name"
-        recipientPhone.text = "\(sendMoneyVM?.selectedCountry?.countryCode ?? "") \(sendMoneyVM?.recipientPhone ?? "Recipient phone")"
+        recipientPhone.text = "\(sendMoneyVM?.selectedCountry?.countryCode ?? "") \(sendMoneyVM?.recipientPhone ?? "Recipient phone")"               
     }
     
     required init?(coder: NSCoder) {
@@ -71,5 +74,11 @@ class TransactionHeaderView: UIView {
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 80 / 2
         $0.clipsToBounds = true
+    }
+    let invalidLabel = configure(UILabel()) {
+        $0.font = UIFont.preferredFont(forTextStyle: .caption1)
+        $0.text = "Invalid name or number"
+        $0.textColor = #colorLiteral(red: 0.9333333333, green: 0, blue: 0, alpha: 1)
+        $0.alpha = 0
     }
 }

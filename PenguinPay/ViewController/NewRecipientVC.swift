@@ -15,13 +15,15 @@ class NewRecipientVC: UITableViewController {
     private var cells = [NewRecipientCell?]()
     private var cardView: CardViewActivityVC?
     
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     
+    //MARK: - Setup functions
     private func setupView() {
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .systemBackground
         tableView.separatorStyle = .none
         tableView.keyboardDismissMode = .interactive
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
@@ -31,30 +33,54 @@ class NewRecipientVC: UITableViewController {
         subscriptions()
     }
     
+    private func setupDelegates() {
+         cells.forEach { (cell) in
+             cell?.viewOfType(type: CustomDefaultTextField.self, process: {
+                 $0.delegate = self
+             })
+         }
+     }
+     
+     private func selectDestine() {
+         let controller = ContinentsListVC()
+         controller.sendMoneyVM = sendMoneyVM
+         let card = CardViewActivityVC(innerController: controller)
+         cardView = card
+         SendMoneyVC.navController?.present(card, animated: true)
+     }
+     
+     private func buildCells() {
+         cells.append(NewRecipientCell(typeOfCell: .newRecipientCoyntryCell))
+         cells.append(NewRecipientCell(typeOfCell: .newRecipientNameCell))
+         cells.append(NewRecipientCell(typeOfCell: .newRecipientPhoneCell))
+         
+         tableView.reloadData()
+     }
+    
     @objc private func handleDone() {
         navigationController?.popViewController(animated: true)
     }
-        
-    
+            
+    //MARK: - Subscriptions
     private func subscriptions() {
         
         //Selecte country
         sendMoneyVM?.bindableCountrySelected.bind{ _ in
             self.cardView?.dismiss(animated: true, completion: {
-                self.sendMoneyVM?.recipientPhone?.removeAll()
-                self.sendMoneyVM?.transactionAmount?.removeAll()
-                self.sendMoneyVM?.formattedBinaryDestineAmount?.removeAll()
-                self.sendMoneyVM?.formattedLocaleTransactionAmount?.removeAll()
+                self.sendMoneyVM?.resetData()                
+                self.cells[2]?.newRecipientPhoneView.changedString.removeAll()
                 self.tableView.reloadData()
             })
         }
         
-        //Check phone validity
-        sendMoneyVM?.isBindablePhoneValid.bind{ isValid in
+        //Check phone validity        
+        sendMoneyVM?.bindablePhoneValid.bind{ isValid in
             if isValid ?? false {
                 self.cells[2]?.newRecipientPhoneView.phoneTextField.showErrorMessage(status: .hide)
+                self.sendMoneyVM?.isPhoneValid = true
             } else {
                 self.cells[2]?.newRecipientPhoneView.phoneTextField.showErrorMessage(status: .show)
+                self.sendMoneyVM?.isPhoneValid = false
             }
         }
         
@@ -62,37 +88,20 @@ class NewRecipientVC: UITableViewController {
         sendMoneyVM?.bindableNameValid.bind(observer: { (isValid) in
             if isValid ?? false {
                 self.cells[1]?.newRecipientNameView.nameTextField.showErrorMessage(status: .hide)
+                self.sendMoneyVM?.isNameValid = true
             } else {
                 self.cells[1]?.newRecipientNameView.nameTextField.showErrorMessage(status: .show)
+                self.sendMoneyVM?.isNameValid = false
             }
         })
     }
     
-    private func setupDelegates() {
-        cells.forEach { (cell) in
-            cell?.viewOfType(type: CustomDefaultTextField.self, process: {
-                $0.delegate = self
-            })
-        }
-    }
+ 
     
-    private func selectDestine() {
-        let controller = ContinentsListVC()
-        controller.sendMoneyVM = sendMoneyVM
-        let card = CardViewActivityVC(innerController: controller)
-        cardView = card
-        SendMoneyVC.navController?.present(card, animated: true)
-    }
-    
-    private func buildCells() {
-        cells.append(NewRecipientCell(typeOfCell: .newRecipientCoyntryCell))
-        cells.append(NewRecipientCell(typeOfCell: .newRecipientNameCell))
-        cells.append(NewRecipientCell(typeOfCell: .newRecipientPhoneCell))
-        
-        tableView.reloadData()
-    }
-    
-    
+}
+
+//MARK: - Tabble Functions
+extension NewRecipientVC {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
     }
@@ -132,7 +141,16 @@ extension NewRecipientVC: UITextFieldDelegate {
         case cells[1]?.newRecipientNameView.nameTextField:
             sendMoneyVM?.recipientName = cells[0]?.newRecipientNameView.formatName(string, textField, range: range)
         case cells[2]?.newRecipientPhoneView.phoneTextField:
-            sendMoneyVM?.recipientPhone = cells[2]?.newRecipientPhoneView.formatPhone(string, textField)
+            switch sendMoneyVM?.returnCountry() {
+            case .nigeria:
+                let _ = cells[2]?.newRecipientPhoneView.formatCurrency(limiting: 12, string, textField, range: range, completion: { (phone) in
+                    sendMoneyVM?.recipientPhone = phone
+                })
+            default:
+                let _ = cells[2]?.newRecipientPhoneView.formatCurrency(limiting: 11, string, textField, range: range, completion: { (phone) in
+                    sendMoneyVM?.recipientPhone = phone
+                })
+            }
         default:
             break
         }

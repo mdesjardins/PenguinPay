@@ -31,8 +31,8 @@ extension String{
     func toCurrencyFormat(locale: String) -> String {
         if let intValue = Int(self){
             let numberFormatter = NumberFormatter()
-            numberFormatter.locale = Locale(identifier: locale)/* Using Nigeria's Naira here or you can use Locale.current to get current locale, please change to your locale, link below to get all locale identifier.*/
-            numberFormatter.numberStyle = NumberFormatter.Style.currency
+            numberFormatter.locale = Locale(identifier: locale)            /* Using Nigeria's Naira here or you can use Locale.current to get current locale, please change to your locale, link below to get all locale identifier.*/
+            numberFormatter.numberStyle = .currency
             return numberFormatter.string(from: NSNumber(value: intValue)) ?? ""
         }
         return ""
@@ -67,17 +67,12 @@ extension String {
 }
 
 extension String {
-    var isPhoneNumber: Bool {
-        do {
-            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.phoneNumber.rawValue)
-            let matches = detector.matches(in: self, options: [], range: NSMakeRange(0, self.count))
-            if let res = matches.first {
-                return res.resultType == .phoneNumber && res.range.location == 0 && res.range.length == self.count
-            } else {
-                return false
-            }
-        } catch {
-            return false
-        }
+    
+    
+    var isValidPhone: Bool {
+        let phoneNumberRegex = "^[0-9+]{0,1}+[0-9]{5,16}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneNumberRegex)
+        let isValidPhone = phoneTest.evaluate(with: self)
+        return isValidPhone
     }
 }

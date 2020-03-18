@@ -18,12 +18,12 @@ class NewRecipientCell: UITableViewCell {
     
     init(typeOfCell: TypeOfCell) {
         super.init(style: .subtitle, reuseIdentifier: nil)
-        backgroundColor = .tertiarySystemBackground
+        backgroundColor = .secondarySystemBackground
         switch typeOfCell {
         case .newRecipientCoyntryCell:
             add(newRecipientCountry) {
                 $0.fillSuperview()
-            }            
+            }
         case .newRecipientNameCell:
             add(newRecipientNameView) {
                 $0.fillSuperview(padding:

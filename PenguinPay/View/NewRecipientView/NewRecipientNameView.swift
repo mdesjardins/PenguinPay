@@ -10,12 +10,7 @@ import UIKit
 
 class NewRecipientNameView: UIView {
     
-    var sendMoneyVM: SendMoneyViewModel? {
-        didSet {
-            setupData()
-//            setupSubscriptions()
-        }
-    }
+    var sendMoneyVM: SendMoneyViewModel? { didSet { setupData() }}
     
     override init(frame: CGRect) {
         super.init(frame: frame)        
@@ -36,18 +31,6 @@ class NewRecipientNameView: UIView {
     private func setupData() {
         nameTextField.text = sendMoneyVM?.recipientName
     }
-    
-//    private func setupSubscriptions() {
-//        sendMoneyVM?.bindableNameValid.bind{ isValid in
-//            if isValid ?? false {
-//                self.nameTextField.showErrorMessage(status: .hide)
-//            } else {
-//                self.nameTextField.showErrorMessage(status: .show)
-//            }
-//        }
-//    }
-    
-    
     
     func formatName(_ string: String, _ textField: UITextField, range: NSRange) -> String? {
         let currentText = textField.text ?? ""
@@ -72,7 +55,7 @@ class NewRecipientNameView: UIView {
         $0.constraintWidth(constant: 80)
     }
     let nameTextField = configure(CustomDefaultTextField()) {
-        $0.addErrorMessage(message: "Enter your full name")
+        $0.addErrorMessage(message: "Enter the full name")
         $0.placeholder = "Barak Obama"
         $0.msgError.constraintHeight(constant: 20)
     }
